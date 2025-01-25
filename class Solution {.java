@@ -1,21 +1,16 @@
 class Solution {
-    public boolean isPalindrome(int x) {
-       
-        if (x < 0 || (x % 10 == 0 && x != 0)) {
-            return false;
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        ListNode dummy = new ListNode(0);
+        int carry = 0;
+        ListNode cur = dummy;
+        while (l1 != null || l2 != null || carry != 0) {
+            int s = (l1 == null ? 0 : l1.val) + (l2 == null ? 0 : l2.val) + carry;
+            carry = s / 10;
+            cur.next = new ListNode(s % 10);
+            cur = cur.next;
+            l1 = l1 == null ? null : l1.next;
+            l2 = l2 == null ? null : l2.next;
         }
-
-        int reversed = 0;
-        int original = x;
-
-       
-        while (x > 0) {
-            int digit = x % 10;
-            reversed = reversed * 10 + digit;
-            x /= 10;
-        }
-
-       
-        return original == reversed;
-    }
+        return dummy.next;
+    }
 }
